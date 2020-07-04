@@ -25,6 +25,14 @@ func TestTable(t *testing.T) {
 	if _, ok := table.Get("xxx"); ok {
 		t.Fatal("found unexpected xxx value")
 	}
+	if v, ok := table.Get("foo"); !ok {
+		t.Error("not found foo value")
+	} else {
+		want := "bar"
+		if v != want {
+			t.Errorf("foo value not parse correct, expect %s got %s\n", want, v)
+		}
+	}
 
 	const value = "ok"
 	table.Insert("foo", value)
